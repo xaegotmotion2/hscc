@@ -8,6 +8,8 @@ import'bootstrap/dist/css/bootstrap.min.css'
 import MainPage from './pages/MainPage.tsx'
 import Fruit from './components/Fruit.tsx'
 import Vegetables from './components/Vegetables.tsx'
+import Register from './components/Register.tsx'
+import Pokemon from './components/Pokemon.tsx'
 
 const router= createBrowserRouter([{
   path:"/",
@@ -28,8 +30,15 @@ const router= createBrowserRouter([{
     },{
       path:"vegetables",
       element:<Vegetables></Vegetables>
+    },{
+      path:"register",
+      element:<Register></Register>
     }
+
   ]
+},{
+  path:'/pokemon/',
+  element:<Pokemon></Pokemon>
 }]);
 
 
