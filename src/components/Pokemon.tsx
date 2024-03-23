@@ -7,7 +7,9 @@ export default function Pokemon() {
         <h1>Pokemon</h1>
         <ul>
             {jsonData?.results.map((pokemon)=>{
-                return <li key={pokemon.name}>{pokemon.name}</li>
+                const number = pokemon.url.split("/")[6];
+                console.log(number);
+                return <li key={pokemon.name}>{"#" + number} {pokemon.name}</li>
             })}
         </ul>
         <button onClick={()=>{pagination("previous")}}>Previous</button>
