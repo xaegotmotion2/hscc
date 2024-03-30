@@ -10,6 +10,7 @@ interface PokemonApiResponse {
     results: Pokemon[]
 }
 type Direction = "previous" | "next"
+//gets a string that that only be previous or next
 
 export default function usePokemonApi() {
     const [jsonData, setJsonData] = useState <PokemonApiResponse | null>(null);
@@ -27,6 +28,20 @@ export default function usePokemonApi() {
             setUrl(jsonData[direction])
         }
     }
-    return { jsonData, pagination }
+    return { jsonData, pagination}
 
+}
+
+/*getPokemon(id) retrives the data from the poke api and calls the data to the */
+export function getPokemon(id) {
+    const [pokemon, setPokemon] = useState();
+    useEffect(()=>{
+        async function fetchData() {
+            const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+            const data = await res.json();
+            setPokemon(data);
+        }
+        fetchData();
+    },[id])
+    return pokemon;
 }
