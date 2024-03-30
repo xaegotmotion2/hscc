@@ -32,3 +32,17 @@ export default function usePokemonApi(){
     return{jsonData, pagination}
 }
 
+
+export function getPokemon(id) {
+    const [pokemon, setPokemon] = useState();
+    useEffect(()=>{
+        async function fetchData() {
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+        const data= await res.json();
+        setPokemon(data);
+    
+    }
+        fetchData();
+    },[id])
+    return pokemon;
+}
