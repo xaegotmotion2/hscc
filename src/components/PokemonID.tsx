@@ -7,5 +7,7 @@ export default function PokemonID() {
     console.log(pokemon)
     return <>
         <img src = {pokemon?.sprites.front_default}></img>
+        <img src = {pokemon?.sprites.back_default}></img>
+        <p>Weight: {pokemon?.weight}</p>
     </>
 }
