@@ -45,3 +45,16 @@ export function getPokemon(id) {
     },[id])
     return pokemon;
 }
+
+export function useSearchPokemon(name){
+    const [pokemon, setPokemon] = useState();
+    useEffect(()=>{
+        async function fetchData() {
+            const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+            const data = await res.json();
+            setPokemon(data);
+        }
+        fetchData();
+    },[name])
+    return pokemon;
+}

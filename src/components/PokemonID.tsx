@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { getPokemon } from "../hooks/usePokemonApi";
+import { getPokemon } from "../Hooks/usePokemonApi";
 
 export default function PokemonID() {
     const {id} = useParams();

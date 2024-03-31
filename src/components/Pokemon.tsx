@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
-import usePokemonApi from "../hooks/usePokemonApi"
+import usePokemonApi from "../Hooks/usePokemonApi"
 
 export default function Pokemon() {
     const { jsonData, pagination } = usePokemonApi();
