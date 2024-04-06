@@ -14,7 +14,7 @@ export default function LoginPage() {
             } 
         }
     return <>
-            {/*<form>
+            {<form>
                     <label htmlFor="username">Username: </label>
                     <input type="text" id="username" ></input>
                     <br></br>
@@ -25,7 +25,7 @@ export default function LoginPage() {
                     <br></br>
                     <button type="submit">Login</button>
                     <br></br>
-            */}
+            }
             <div className="container">
                 <center><h1>Login to Google</h1></center>
             </div>
