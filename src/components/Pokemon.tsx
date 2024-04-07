@@ -1,9 +1,18 @@
 import { NavLink, Outlet } from "react-router-dom";
 import usePokemonApi from "../Hooks/usePokemonApi"
+import { Spinner } from "react-bootstrap";
 
 export default function Pokemon() {
-    const { jsonData, pagination } = usePokemonApi();
-    console.log(jsonData);
+    const { jsonData, pagination, isLoading } = usePokemonApi();
+    console.log(isLoading);
+
+    if (isLoading) {
+        return <>
+        <div className = "Spinner">
+            <Spinner></Spinner>
+        </div>
+        </>
+    }
     return <>
         <h1>Pokemon</h1>
         <ul>

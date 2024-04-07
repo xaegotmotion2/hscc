@@ -13,13 +13,16 @@ type Direction = "previous" | "next"
 //gets a string that that only be previous or next
 
 export default function usePokemonApi() {
+    const [isLoading, setIsLoading] = useState(false);
     const [jsonData, setJsonData] = useState <PokemonApiResponse | null>(null);
     const [url, setUrl] = useState ("https://pokeapi.co/api/v2/pokemon/")
     useEffect(() => {
         async function fetchData() {
+            setIsLoading(true);
             const res = await fetch(url);
             const data = await res.json();
             setJsonData(data);
+            setIsLoading(false);
         }
         fetchData();
     }, [url])
@@ -28,7 +31,7 @@ export default function usePokemonApi() {
             setUrl(jsonData[direction])
         }
     }
-    return { jsonData, pagination}
+    return { jsonData, pagination, isLoading}
 
 }
 

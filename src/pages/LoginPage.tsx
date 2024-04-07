@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import useAuth from "../Hooks/useAuth";
 
 export default function LoginPage() {
 
@@ -10,6 +11,7 @@ export default function LoginPage() {
         const username = usernameRef.current?.value;
         const password = passwordRef.current?.value;
         if (username && password) {
+            useAuth(password, username);
             alert(`Username: ${username}` + ` Password: ${password}`)
         } else {
             alert(`Please insert value`)

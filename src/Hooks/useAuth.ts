@@ -1,10 +1,13 @@
+const url = import.meta.env.VITE_API_URL;
+const APIkey = import.meta.env.VITE_API_KEY;
+
 // The API expects a 64 byte key (128 hex digits long):
 const KEY_SIZE_BYTES = 64;
 // The API expects a 16 byte salt (32 hex digits long):
 const SALT_SIZE_BYTES = 16;
 // A function that converts a ByteArray or any other array of bytes into a
 // string of hexadecimal digits
-const convertBufferToHex = (buffer) => {
+const convertBufferToHex = (buffer: Uint8Array | ArrayBuffer) => {
   return (
     // This next line ensures we're dealing with an actual array
     [...new Uint8Array(buffer)]
@@ -21,7 +24,7 @@ const convertBufferToHex = (buffer) => {
 
 // A function that converts a string of hexadecimal digits into an array of
 // bytes (you should verify that the string is hex first!)
-const convertHexToBuffer = (hexString) => {
+const convertHexToBuffer = (hexString: string) => {
   return Uint8Array.from(
     // Keep in mind that:
     // 1 byte = 8 bits
@@ -33,7 +36,7 @@ const convertHexToBuffer = (hexString) => {
 };
 
 // Turns a password (string) and salt (buffer) into a key and salt (hex strings)
-const deriveKeyFromPassword = async (passwordString, saltBuffer) => {
+const deriveKeyFromPassword = async (passwordString: string, saltBuffer: Uint8Array) => {
   // We'll use a TextEncoder to convert strings into arrays of bytes:
   const textEncoder = new TextEncoder('utf-8');
 
@@ -93,10 +96,37 @@ const deriveKeyFromPassword = async (passwordString, saltBuffer) => {
   return { keyString, saltString };
 };
 async function getSalt(username: string){
-    const result= await fetch(`https://blogpress.api.hscc.bdpa.org/v1/users/${username}`);
-    console.log(result);
+    const options = {
+        headers:{
+            'Authorization': APIkey,
+            'content-type': 'application/json'
+        }
+    };
+    const result = await fetch(`${url}users/${username}`, options);
+    console.log(result)
+    const data = await result.json();
+    return data.user.salt;
 }
-export default function useAuth(password: string, username: string){
-    getSalt(username);
-    return password;
+async function getAuth(key:string, username:string){
+  const options = {
+    method: 'POST',
+    body:JSON.stringify({
+      key:key
+    }),
+    headers:{
+        'Authorization': APIkey,
+        'content-type': 'application/json'
+    }
+  };
+  const result = await fetch(`${url}users/${username}/auth`, options);
+  const data = await result.json();
+  return data;
+}
+
+export default async function useAuth(password: string, username: string){
+    const salt = await getSalt(username);
+    const key = await deriveKeyFromPassword(password, convertHexToBuffer(salt));
+    const result = await getAuth(key.keyString, username);
+    console.log(result)
+    return result;
 }
