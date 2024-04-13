@@ -12,6 +12,9 @@ import Register from './components/Register.tsx'
 import Pokemon from './components/Pokemon.tsx'
 import PokemonID from './components/PokemonID.tsx'
 import SearchPage from './pages/SearchPage.tsx'
+import UserContextProvider from './context/UserContextProvider.tsx'
+import Home from './components/Home.tsx'
+import React from 'react'
 
 const router= createBrowserRouter([{
   path:"/",
@@ -48,13 +51,17 @@ const router= createBrowserRouter([{
 },{
   path:'/search',
   element:<SearchPage></SearchPage>
+},{
+  path: '/home',
+  element: <Home></Home>
 }]);
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-
-  <RouterProvider router={router}>
-  
-  </RouterProvider>
+  <React.StrictMode>  
+    <UserContextProvider>
+    <RouterProvider router={router}></RouterProvider>
+    </UserContextProvider>
+  </React.StrictMode>
 
 )

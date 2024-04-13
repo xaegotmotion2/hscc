@@ -124,9 +124,9 @@ async function getAuth(key:string, username:string){
 }
 
 export default async function useAuth(password: string, username: string){
-  const [salt, user] = await getSalt(username);
-  const key = await deriveKeyFromPassword(password, convertHexToBuffer(salt));
-  const result = await getAuth(key.keyString, username);
-  console.log(result)
-  return [result.success, user];
+    const [salt, user] = await getSalt(username);
+    const key = await deriveKeyFromPassword(password, convertHexToBuffer(salt));
+    const result = await getAuth(key.keyString, username);
+    console.log(result)
+    return [result.success, user];
 }

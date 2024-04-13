@@ -1,9 +1,12 @@
 import { useContext, useRef } from "react";
 import useAuth from "../Hooks/useAuth";
+import React from "react";
 import UserContext from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
-    const{user, setUser} = useContext(UserContext)
+    const { user, setUser } = useContext(UserContext)
+    const navigate = useNavigate();
 
     const usernameRef = useRef(null);
     const passwordRef = useRef(null);
@@ -14,8 +17,10 @@ export default function LoginPage() {
         const password = passwordRef.current?.value;
         if (username && password) {
             const [isAuthorized, user] = await useAuth(password, username);
-            if(isAuthorized){
+            if (isAuthorized) {
                 setUser && setUser(user);
+                window.localStorage.setItem("user", JSON.stringify(user))
+                navigate("/home");
             }
             alert(`Username: ${username}` + ` Password: ${password}`)
         } else {
@@ -24,7 +29,8 @@ export default function LoginPage() {
     }
     return (
         // HW: Create Registration Page
-        <>{user && user.username}
+        <>
+            {user && user.username}
             <center><h1>Login to inBDPA</h1></center>
             <div className="container">
                 <form onSubmit={handleSubmit}>
@@ -39,6 +45,7 @@ export default function LoginPage() {
                     <button className="btn btn-dark" type="submit">Login</button>
                 </form>
             </div>
+
         </>
     )
 }
