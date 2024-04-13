@@ -8,6 +8,8 @@ export default function PokemonID() {
     return <>
         <img src = {pokemon?.sprites.front_default}></img>
         <img src = {pokemon?.sprites.back_default}></img>
-        <p>Weight: {pokemon?.weight}</p>
+        <p>Weight: {pokemon?.weight} lb</p>
+        <p>Height: {pokemon?.height}</p>
+        
     </>
 }

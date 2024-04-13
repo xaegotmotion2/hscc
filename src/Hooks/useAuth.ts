@@ -105,7 +105,7 @@ async function getSalt(username: string){
     const result = await fetch(`${url}users/${username}`, options);
     console.log(result)
     const data = await result.json();
-    return data.user.salt;
+    return [data.user.salt, data.user];
 }
 async function getAuth(key:string, username:string){
   const options = {
@@ -124,9 +124,9 @@ async function getAuth(key:string, username:string){
 }
 
 export default async function useAuth(password: string, username: string){
-    const salt = await getSalt(username);
-    const key = await deriveKeyFromPassword(password, convertHexToBuffer(salt));
-    const result = await getAuth(key.keyString, username);
-    console.log(result)
-    return result;
+  const [salt, user] = await getSalt(username);
+  const key = await deriveKeyFromPassword(password, convertHexToBuffer(salt));
+  const result = await getAuth(key.keyString, username);
+  console.log(result)
+  return [result.success, user];
 }
