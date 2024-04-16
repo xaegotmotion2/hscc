@@ -66,6 +66,37 @@ button:focus-visible {
   height: 100px !important;
   width: 100px !important;
 }
+.stockRate{
+  font-size: 20px;
+  border-radius: 8px;
+  background-color: #242424;
+  margin:5px;
+  padding: 10px;
+}
+.stockRate p{
+  color: #b57b3e;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+.barGraph{
+}
+.barUSD{
+  border-radius: 5px;
+  background-color: #242424;
+  width: 20%;
+  margin: 15px;
+}
+.barGBP{
+  border-radius: 5px;
+  background-color: #242424;
+  width: 20%;
+  margin: 15px;
+}
+.barEUR{
+  border-radius: 5px;
+  background-color: #242424;
+  width: 20%;
+  margin: 15px;
+}
 
 @media (prefers-color-scheme: light) {
   :root {

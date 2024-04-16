@@ -10,5 +10,5 @@ export default function Dashboard({user}: DashboardProps) {
             <Sidebar user={user}></Sidebar>
             <Profile user={user}></Profile>
         </div>
-    )
+    );
 }

@@ -15,6 +15,7 @@ import SearchPage from './pages/SearchPage.tsx'
 import UserContextProvider from './context/UserContextProvider.tsx'
 import Home from './components/Home.tsx'
 import React from 'react'
+import RocketLeague from './components/Bitcoin.tsx'
 
 const router= createBrowserRouter([{
   path:"/",
@@ -54,6 +55,9 @@ const router= createBrowserRouter([{
 },{
   path: '/home',
   element: <Home></Home>
+},{
+  path: '/rocketleague',
+  element:<RocketLeague></RocketLeague>
 }]);
 
 
