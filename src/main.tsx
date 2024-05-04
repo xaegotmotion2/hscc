@@ -18,6 +18,7 @@ import React from 'react'
 import RocketLeague from './components/Bitcoin.tsx'
 import BitCoin from './components/Bitcoin.tsx'
 import RegistrationPage from './pages/RegistrationPage.tsx'
+import ToDoList from './components/ToDoList.tsx'
 
 const router= createBrowserRouter([{
   path:"/",
@@ -55,14 +56,17 @@ const router= createBrowserRouter([{
   path:'/search',
   element:<SearchPage></SearchPage>
 },{
-  path: '/home',
-  element: <Home></Home>
+  path:'/home',
+  element:<Home></Home>
 },{
-  path: '/bitcoin',
+  path:'/bitcoin',
   element:<BitCoin></BitCoin>
 },{
-  path: '/reg',
+  path:'/reg',
   element:<RegistrationPage></RegistrationPage>
+}, {
+  path:'/todo',
+  element:<ToDoList></ToDoList>
 }]);
 
 
